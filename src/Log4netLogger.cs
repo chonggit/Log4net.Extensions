@@ -7,6 +7,8 @@ namespace Log4net.Extensions
 {
     internal class Log4netLogger : ILogger
     {
+        private static readonly Type ThisDeclaringType = typeof(Log4netLogger);
+
         private readonly ILog _log;
 
         public Log4netLogger(ILog log)
@@ -21,7 +23,6 @@ namespace Log4net.Extensions
 
         public bool IsEnabled(LogLevel logLevel)
         {
-
             return logLevel switch
             {
                 LogLevel.Trace => _log.IsDebugEnabled,
@@ -38,7 +39,7 @@ namespace Log4net.Extensions
         {
             if (IsEnabled(logLevel))
             {
-                _log.Logger.Log(typeof(TState), GetLog4netLevel(logLevel), formatter(state, exception), exception);
+                _log.Logger.Log(ThisDeclaringType, GetLog4netLevel(logLevel), formatter(state, exception), exception);
             }
         }
 
