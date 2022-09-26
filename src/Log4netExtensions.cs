@@ -7,9 +7,15 @@ namespace Log4net.Extensions
     {
         public static IServiceCollection AddLog4net(this IServiceCollection services)
         {
-            services.AddLogging(configure =>
+            return AddLog4net(services, builder => { });
+        }
+
+        public static IServiceCollection AddLog4net(this IServiceCollection services, Action<ILoggingBuilder> configure)
+        {
+            services.AddLogging(builder =>
             {
-                configure.AddProvider(new Log4netProvider());
+                builder.AddProvider(new Log4netProvider());
+                configure(builder);
             });
 
             return services;

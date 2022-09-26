@@ -14,7 +14,7 @@ namespace Log4net.Extensions.Test
                 File.Delete("log4net.xml");
             }
             var services = new ServiceCollection();
-            services.AddLog4net();
+            services.AddLog4net(builder => { builder.SetMinimumLevel(LogLevel.Trace); });
 
             IServiceProvider serviceProvider = services.BuildServiceProvider();
             ILoggerFactory factory = serviceProvider.GetRequiredService<ILoggerFactory>();
@@ -22,7 +22,12 @@ namespace Log4net.Extensions.Test
 
             Assert.IsNotNull(logger);
 
-            logger.LogInformation("test");
+            logger.LogTrace("trace");
+            logger.LogDebug("debug");
+            logger.LogInformation("information");
+            logger.LogWarning("warning");
+            logger.LogError("error");
+            logger.LogCritical("critical");
         }
     }
 }

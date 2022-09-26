@@ -21,6 +21,7 @@ namespace Log4net.Extensions
 
         public bool IsEnabled(LogLevel logLevel)
         {
+
             return logLevel switch
             {
                 LogLevel.Trace => _log.IsDebugEnabled,
@@ -28,7 +29,7 @@ namespace Log4net.Extensions
                 LogLevel.Information => _log.IsInfoEnabled,
                 LogLevel.Warning => _log.IsWarnEnabled,
                 LogLevel.Error => _log.IsErrorEnabled,
-                LogLevel.Critical => _log.IsFatalEnabled,
+                LogLevel.Critical => _log.Logger.IsEnabledFor(Level.Critical),
                 _ => false,
             };
         }
@@ -50,7 +51,7 @@ namespace Log4net.Extensions
                 LogLevel.Information => Level.Info,
                 LogLevel.Warning => Level.Warn,
                 LogLevel.Error => Level.Error,
-                LogLevel.Critical => Level.Fatal,
+                LogLevel.Critical => Level.Critical,
                 _ => Level.Off,
             };
         }
