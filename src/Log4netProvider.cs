@@ -11,6 +11,8 @@ namespace Log4net.Extensions
 
         public Log4netProvider()
         {
+            // 如果存在本地配置文件，则读取本地配置，
+            // 如果不存在配置文件，则从嵌入式资源中读取配置并保存到本地
             if (File.Exists(CONFIG_FILE) == false)
             {
                 using Stream stream = typeof(Log4netProvider).Assembly.GetManifestResourceStream("Log4net.Extensions.log4net.xml");
