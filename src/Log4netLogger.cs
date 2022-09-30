@@ -39,11 +39,11 @@ namespace Log4net.Extensions
         {
             if (IsEnabled(logLevel))
             {
-                _log.Logger.Log(ThisDeclaringType, GetLog4netLevel(logLevel), formatter(state, exception), exception);
+                _log.Logger.Log(ThisDeclaringType, ConvertLogLevel(logLevel), formatter(state, exception), exception);
             }
         }
 
-        private static Level GetLog4netLevel(LogLevel logLevel)
+        private static Level ConvertLogLevel(LogLevel logLevel)
         {
             return logLevel switch
             {
