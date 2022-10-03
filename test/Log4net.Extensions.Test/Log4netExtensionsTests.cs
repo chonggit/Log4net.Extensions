@@ -26,8 +26,8 @@ namespace Log4net.Extensions.Test
             logger.LogDebug("debug");
             logger.LogInformation("information");
             logger.LogWarning("warning");
-            logger.LogError("error");
-            logger.LogCritical("critical");
+            logger.LogError(new ApplicationException("ApplicationException"), "error");
+            logger.LogCritical(new ApplicationException("ApplicationException"), "critical");
         }
     }
 }
