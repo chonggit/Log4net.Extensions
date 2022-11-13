@@ -14,8 +14,12 @@ namespace Log4net.Extensions.Test
                 File.Delete("log4net.xml");
             }
             var services = new ServiceCollection();
-            services.AddLog4net(builder => { builder.SetMinimumLevel(LogLevel.Trace); });
-
+            services.AddLogging(builder =>
+            {
+                builder.SetMinimumLevel(LogLevel.Debug);
+                builder.AddLog4net();
+            });
+ 
             IServiceProvider serviceProvider = services.BuildServiceProvider();
             ILoggerFactory factory = serviceProvider.GetRequiredService<ILoggerFactory>();
             ILogger logger = factory.CreateLogger<Log4netExtensionsTests>();
